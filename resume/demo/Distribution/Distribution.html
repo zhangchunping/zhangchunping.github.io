@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Distribution</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;	}
+		/*html{height: 100%;}
+		body{ height: 100%;}
+		.box{width: 800px; height:560px; background: url(img/111.jpg) no-repeat center center; margin: 100px auto;}*/
+		body{height:100%; background:#ccc; font-family:"微软雅黑";}
+		h1{background: #000; font-size: 16px; line-height: 40px; text-align: center; color: #fff;letter-spacing: 2px;
+		width: 100%;top: 0;left: 0; z-index: 99;}
+		.box{width: 800px;margin: 50px auto; background: #0b0b0b;position: relative;}
+		.box img{width: 800px; height: 500px; margin-top: 10px;}
+		.box div{position: absolute; top:135px; left: 408px; width: 370px; color: #c9d9f2;font-size: 12px; font-family: '宋体';}
+		.box div p{line-height: 20px; text-indent: 2em;}
+		.box div p span{opacity: 0;}
+	</style>
+	<script type="text/javascript" src='js/startMove.js'></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oBox=document.getElementById('box');
+			var timer=null;
+			var aSpan=[];
+
+			var str1='喜欢这种宁静的味道，更喜欢这种淡淡的清幽与雅静。仿似繁华喧嚣的城市间偶遇一流水小溪。生活在繁华喧闹的城市里，为了生活而劳累奔波。';
+			var str2='让我无比渴望田野乡间，回到孩提时，放牛的山坡上，躺在大树下，听鸟啼虫鸣，倾听自然地风声。享受清风与纯净带给我的清雅与自然。那时，只有泥土的气息与放牛娃幽远而干净的笛声。闭上眼睛，任凭蚂蚁从脸上爬过，忘记一切。愿时间永停留在这一刻。';
+			var str3='山峦一座接着一座，层层叠叠，仿似优雅的音乐，跳跃着一段段迷人的音符。让我浮想联篇。';
+			
+			function createP(str){
+				var oP=document.createElement('p');
+				oBox.appendChild(oP);
+				for(var i=0;i<str.length;i++){
+					var oSpan=document.createElement('span');
+					oSpan.innerHTML=str.charAt(i);
+					oP.appendChild(oSpan);
+					aSpan.push(oSpan);
+				}
+			}
+			createP(str1);
+			createP(str2);
+			createP(str3);
+			var i=0;
+			timer=setInterval(function(){
+				move(aSpan[i],{opacity:1},{time:300,type:'ease-out'});
+				i++;
+				if(i==aSpan.length)clearInterval(timer);
+			},100);
+		}
+	</script>
+</head>
+<body>
+	<h1>分布运动-打字机效果</h1>
+	<div class="box">
+		<img src="img/111.jpg" alt="">
+		<div id="box">
+
+		</div>
+		
+	</div>
+</body>
+</html>

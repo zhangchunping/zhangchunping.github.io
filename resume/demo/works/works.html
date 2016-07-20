@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人作品</title>
+<link rel="stylesheet" href="../../css/base.css" />
+<style>
+html{ background:#b3d6f2;}
+.screen {
+	background: url(img/bg5.jpg) left top no-repeat;
+	position: relative;
+	overflow: hidden;
+	background-size: contain;
+	width: 1500px;
+	height: 800px;
+	margin: 100px auto;
+}
+.screen ul {
+	width: 1280px;
+	margin: 0 auto;
+}
+.screen .title {
+	margin-top: 20px;
+	text-align: center;
+}
+.screen li {
+	float: left;
+	width: 300px;
+	height: 300px;
+	margin: 10px;
+	display: inline;
+	position: relative;
+	overflow: hidden;
+}
+.screen li span {
+	width: 300px;
+	height: 100px;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	background: rgba(0,0,0,0.6);
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+	color: #FFF;
+	text-align: center;
+	line-height: 100px;
+}
+</style>
+<script src="../../js/move.js"></script>
+<script>
+window.onload=function(){
+	var oDemo=document.getElementById("demo_box");
+	var aShowLi=oDemo.children;
+	var oSpan=oDemo.getElementsByTagName('span');
+	for(var i=0;i<aShowLi.length;i++){
+		(function(i){
+			aShowLi[i].onmouseover=function(){
+				move(oSpan[i],{top:200})
+			}
+			aShowLi[i].onmouseout=function(){
+				move(oSpan[i],{top:300})
+			}
+		})(i)
+	}
+		
+}
+</script>
+</head>
+
+<body>
+<div class="screen gWidth">
+	<div class="title"> <img src="img/demo.png"> </div>
+	<ul class="clearfix" id="demo_box">
+		<li> <a href="../waterfall/waterfall.html" target="_blank"> <img src="img/20160418110245_03.png" /> <span>瀑布流效果</span> </a> </li>
+		<li> <a href="../tab/tab.html" target="_blank"> <img src="img/20160418120725_03.png" /> <span>无缝选项卡</span> </a> </li>
+		<li> <a href="../Apple menu/Apple menu.html" target="_blank"> <img src="img/20160417205635_03.png" /> <span>mac桌面</span> </a> </li>
+		<li> <a href="../Hook/hook-index.html" target="_blank"> <img src="img/20160418140945_03.png" /> <span>拉勾网拉钩效果</span> </a> </li>
+		<li> <a href="../clock/clock.html" target="_blank"> <img src="img/20160418133902_03.png" /> <span>CSS3时钟</span> </a> </li>
+		<li> <a href="../Drag/Drag.html" target="_blank"> <img src="img/20160418115538_03.png" /> <span>照片墙</span> </a> </li>
+		<li> <a href="../apple_desktop/desktop.html" target="_blank"> <img src="img/20160418135110_03.png" /> <span>苹果手机菜单</span> </a> </li>
+		<li>
+			 <a href="../block/block.html" target="_blank">
+			 	 <img src="img/20160418161307_03.png" /> 
+			  	<span>分块运动</span>
+			 </a>
+		 </li>
+	</ul>
+</div>
+</body>
+</html>

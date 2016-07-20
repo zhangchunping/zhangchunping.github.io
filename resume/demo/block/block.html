@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>分块运动</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: url(img/bg.jpg) no-repeat;
+	background-size: cover;
+}
+input {
+	width: 150px;
+	height: 40px;
+	position: absolute;
+	top: 70px;
+	left: 50%;
+	margin-left: -75px;
+	background: skyblue;
+	color: brown;
+	font-size: 22px;
+	cursor: pointer;
+}
+#div1 {
+	width: 800px;
+	height: 300px;
+	background: url(img/0.jpg) no-repeat;
+	margin: 100px auto;
+	position: relative;
+}
+#div1 span {
+	position: absolute;
+}
+h1 {
+	background: #000;
+	font-size: 16px;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+}
+p {
+	text-align: center;
+	padding: 10px 0;
+	color: #0ff;
+}
+p a {
+	color: #0ff;
+	text-decoration: none;
+}
+p a:hover {
+	text-decoration: underline;
+}
+</style>
+<script src="../../js/move.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBox=document.getElementById('div1'),
+		oBtn=document.getElementById('btn1');
+
+	var C=8,J=15;
+	for (var c = 0; c < C; c++) {
+		for (var j = 0; j < J; j++) {
+			var oSpan=document.createElement('span');
+			oSpan.style.width=oBox.offsetWidth/J+'px';
+			oSpan.style.height=oBox.offsetHeight/C+'px';
+			oSpan.style.top=c*oBox.offsetHeight/C+'px';
+			oSpan.style.left=j*oBox.offsetWidth/J+'px';
+			oBox.appendChild(oSpan);
+			oSpan.style.backgroundPosition=-oSpan.offsetLeft+'px -'+oSpan.offsetTop+'px';
+			oSpan.j=j;
+			oSpan.c=c;
+		};
+	};
+	var now=0;
+	var Ready=true;
+	oBtn.onclick=function ()
+	{
+		if(!Ready)return;
+		Ready=false;
+		var aSpan=oBox.getElementsByTagName('span');
+		for (var i = 0; i < aSpan.length; i++) {
+			aSpan[i].style.backgroundImage='url(img/'+now+'.jpg)';
+			aSpan[i].style.opacity='1';
+			aSpan[i].style.filter='alpha(opacity:100)';
+
+		};
+		now++;
+		if(now==4)now=0;
+		oBox.style.backgroundImage='url(img/'+now+'.jpg)';
+
+		var j=0;
+		for (var i = 0; i < aSpan.length; i++) {
+			(function (index){
+				switch(now){
+					case 0:
+					setTimeout(fnMove,( aSpan[i].j+C-aSpan[i].c )*50)//左下
+						break;
+					case 1:
+					setTimeout(fnMove,(aSpan[i].j+aSpan[i].c)*50)//左上
+						break;
+					case 2:
+					setTimeout(fnMove,(J-aSpan[i].j+aSpan[i].c)*50)//右上
+						break;
+					case 3:
+					setTimeout(fnMove,(J-aSpan[i].j+C-aSpan[i].c)*50)//右下
+						break;
+					};
+					
+				function fnMove()
+				{
+					j++;
+					move(aSpan[index], {opacity: 0}, {duration: 100});
+					if (j==aSpan.length) {
+						setTimeout(function(){
+							Ready=true;
+						},150)
+						
+					};
+				}
+			})(i)
+			
+		};
+		
+		
+
+	};
+
+};
+</script>
+</head>
+
+<body>
+<h1>分块运动</h1>
+<input type="button" value="下一张" id="btn1">
+<div id="div1"> </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>瀑布流-keyd</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;}
+a{text-decoration:none;color:#444;}
+a:hover{color:#999;}
+body{height:100%; background:#ccc; font-family:"微软雅黑";}
+h1{background: #000; font-size: 16px; line-height: 40px; text-align: center; color: #fff;letter-spacing: 2px;
+width: 100%;top: 0;left: 0; z-index: 99;}
+.box{width: 1200px; height:auto; position:relative; margin:80px auto;}
+.box ul{float: left;width: 285px;margin-right: 20px;}
+.box ul:nth-child(4){margin-right: 0px;}
+.box ul.ul_last{margin-right: 0px;}
+.box ul li{width: 285px;padding-bottom: 20px;}
+.box ul li .info{border-radius: 8px;background: #fff;box-shadow:0 0 11px #666;}
+.box ul li .info .pic{padding-top: 10px;}
+.box ul li .info .pic img{width: 265px;display: block;margin: 0 auto;}
+.box ul li .info .desc{width:265px; height:40px; margin:0 auto; line-height:40px; text-align:right; color:#666; font-size:18px; font-weight:bold; overflow:hidden;}
+
+</style>
+<script>
+	var temp=[
+			{'src':'0.jpg','title':'淡淡的忧桑。。。'},
+			{'src':'1.jpg','title':'稀有萌物'},
+			{'src':'2.jpg','title':'主人，我饿啦。。。'},
+			{'src':'3.jpg','title':'小可怜~~'},
+			{'src':'4.jpg','title':'嗨！大家好~'},
+			{'src':'5.jpg','title':'你们怎么是反的'},
+			{'src':'6.jpg','title':'水汪汪的大眼睛'},
+			{'src':'7.jpg','title':'狂拽帅气吊炸天。。'},
+			{'src':'8.jpg','title':'让我静一会儿。'},
+			{'src':'9.jpg','title':'圆圆的小脑袋。'},
+			{'src':'10.jpg','title':'你们找不到我。。'}
+		];
+		//获取元素，创建oLi,循环，排序，添加
+	window.onload=function(){
+		var oBox=document.getElementById('box');
+		var oUl=oBox.children;
+		function createLi(n){
+			var oLi=document.createElement('li');
+			oLi.innerHTML='<div class="info">'
+				+'<div class="pic" >'
+					+'<img style="width:265px" src="img/'+temp[n].src+'"/>'
+				+'</div>'
+				+'<div class="desc">'
+					+'<a href="#">'+temp[n].title+'</a>'
+				+'</div>'
+			+'</div>';
+			return oLi;
+		}
+		function create20(){		
+			for (var i = 0; i < temp.length; i++) {
+				var oLi=createLi(i);
+				var arr=[];
+				for (var j = 0; j < oUl.length; j++) {
+					arr[j]=oUl[j];
+				};
+				arr.sort(function(a,b){
+					return a.offsetHeight-b.offsetHeight;
+				});
+				arr[0].appendChild(oLi);
+			};
+		}
+		create20();
+		window.onscroll=function(){
+			var scrollT=document.documentElement.scrollTop||document.body.scrollTop;
+			var clientH=document.documentElement.clientHeight;
+			var scrollB=scrollT+clientH;
+			if(scrollB>document.body.scrollHeight-200){
+			    create20();
+			}
+
+			//吸顶条
+			var oH1=document.getElementById('oh1');
+			var offsetT=oH1.offsetTop;
+
+			if(window.navigator.userAgent.toLowerCase().indexOf('msie 6.0')!=-1){
+			    if(scrollT>=offsetT){
+			        oH1.style.top=scrollT+'px';
+			        oH1.style.position='absolute';
+			    }else{
+			        oH1.style.position='static';
+			    }
+			}else{
+			    if(scrollT>=offsetT){
+			        oH1.style.position='fixed';
+			        // oDiv2.style.display='block';
+			    }else{
+			        oH1.style.position='static';
+			        // oDiv2.style.display='none';
+			    }
+			}
+		}
+
+	}
+</script>
+</head>
+
+<body>
+<!--	<ul>
+ 		<li>
+			<div class="info">
+				<div class="pic" >
+					<img style="width:260px" src="img/0.jpg"/>
+				</div>
+				<div class="desc">
+					<a href="#">淡淡的忧桑。。。</a>
+				</div>
+			</div>
+		</li> 
+	</ul>-->
+<h1 id='oh1'>仿花瓣网瀑布流</h1>
+<div class="box" id="box">
+	<ul></ul>
+	<ul></ul>
+	<ul></ul>
+	<ul class="ul_last"></ul>
+</div>
+</body>
+</html>

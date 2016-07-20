@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>联系方式</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.screen {
+	background: url(../../img/19834197_172006785000_2.jpg) left top no-repeat;
+	position: relative;
+	overflow: hidden;
+	height: 720px;
+	margin: 50px auto;
+	width: 1366px;
+}
+.screen .link_box {
+	position: absolute;
+	top: -100%;
+	left: 150px;
+}
+.screen .link_box li {
+	float: left;
+	margin-right: 50px;
+}
+.screen .find {
+	position: absolute;
+	width: 800px;
+	bottom: 30%;
+	left: 50%;
+	margin-left: -400px;
+}
+</style>
+<script src="../../js/move.js"></script>
+<script>
+window.onload=function(){
+	var oTell=document.getElementById("link");
+	var oFind=document.getElementById("find");
+	move(oFind, {bottom: 180},{duration:1000,complete: function(){
+			move(oTell,{top: -50},{duration:800})
+		}})
+}
+</script>
+</head>
+
+<body>
+<div class="screen gWidth">
+	<ul class="link_box" id="link">
+		<li><img src="img/email.png"></li>
+		<li><img src="img/tel.png"></li>
+		<li><img src="img/qq.png"></li>
+	</ul>
+	<div class="find" id="find"> <img src="img/find.png" /> </div>
+</div>
+</body>
+</html>

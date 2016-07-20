@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜效果展示</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;}
+		body{height:100%; width:100%;background:#fff; font-family:"微软雅黑";}
+		h1{background: #000; font-size: 16px; line-height: 40px; text-align: center; color: #fff;letter-spacing: 2px;width: 100%;top: 0;left: 0; z-index: 99;}
+		.main{width: 1035px;height: 460px; margin: 80px auto;}
+		#min{width: 345px; height: 230px; border: 2px solid green; position: absolute;overflow: hidden; left:165px; top:120px;}
+		#ospan{ display:none; cursor:all-scroll; position:absolute; left:0; top:0; width:80px; height:80px; background:slateblue; opacity:.5; filter:alpha(opacity:50); z-index:2;}
+		#min img{position: absolute;width: 345px; height: 230px;}
+		#max{display:block;position: absolute; top:120px;left: 512px;width: 690px; height: 460px; border: 2px solid red;overflow: hidden;}
+		#max img{width: 1380px; height: 920px;position: absolute;left: 0;top:0;}
+	</style> 
+	<script>
+	    window.onload=function(){
+	        var oSpan=document.getElementById('ospan');
+	        var oMin=document.getElementById('min');
+	        var oMax=document.getElementById('max');
+	        var oImg=oMax.children[0];
+	        var oImg1=oMin.children[0];
+	        oMin.onmouseover=oSpan.onmouseover=oImg1.onmouseover=function(){
+	            oSpan.style.display='block';
+	            oMax.style.display='block';
+	        };
+	        oMin.onmouseout=function(){
+	            oSpan.style.display='none';
+	            oMax.style.display='none';
+	        };
+	        oMin.onmousemove=function(ev){
+	            var oEvent=ev||event;
+
+	            var l=oEvent.clientX-oMin.offsetLeft-oSpan.offsetWidth/2;
+	            var t=oEvent.clientY-oMin.offsetTop-oSpan.offsetHeight/2;
+
+	            if(l<=0)l=0;
+	            if(t<=0)t=0;
+	            if(l>=oMin.offsetWidth-oSpan.offsetWidth)l=oMin.offsetWidth-oSpan.offsetWidth;
+	            if(t>=oMin.offsetHeight-oSpan.offsetHeight)t=oMin.offsetHeight-oSpan.offsetHeight;
+
+	            var scaleX=l/(oMin.offsetWidth-oSpan.offsetWidth);
+	            var scaleY=t/(oMin.offsetHeight-oSpan.offsetHeight);
+	            oSpan.style.left=l+'px';
+	            oSpan.style.top=t+'px';
+
+	            oImg.style.left=-scaleX*(oImg.offsetWidth-oMax.offsetWidth)+'px';
+	            oImg.style.top=-scaleY*(oImg.offsetHeight-oMax.offsetHeight)+'px';
+	        }
+	    }
+	</script>
+</head>
+<body>
+	<h1>放大镜效果展示</h1>
+	<div class="main">
+		<div id="min">
+			<img src="img/1.jpg" alt="">
+			<span id="ospan"></span>
+		</div>
+		<div id="max">
+			<img src="img/1.jpg" alt="">
+		</div>
+	</div>
+</body>
+</html>

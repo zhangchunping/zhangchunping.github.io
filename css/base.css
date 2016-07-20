@@ -1,0 +1,53 @@
+@charset "utf-8";
+*{ margin:0; padding:0;}
+body {
+	margin: 0;
+	background: #fff;
+	color: #333;
+	font-family: 'Pingfang SC', 'Lantinghei SC', 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+	-webkit-print-color-adjust: exact;
+}
+h1, h2, h3, h4, h5, h6, p, ul, ol { margin: 0; padding: 0; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; font-size: inherit; }
+ul, ol { list-style-type: none; }
+p, ul, ol {
+	text-align: justify;
+	text-justify: inter-ideograph;
+	line-height: 1.7;
+}
+img { border: none; vertical-align: top; }
+a, a:visited { text-decoration: none; color: #08c; }
+a:hover { text-decoration: underline; }
+
+
+/* 清浮动 */
+.clear { clear: both; height: 0; overflow: hidden; }
+.clearfix:after {
+	display: block;
+	overflow: hidden;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	content: "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>九宫格拖拽</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;}
+		html,body{height:100%;background:#fff;font-family:"微软雅黑";}
+		h1{background: #000; font-size: 16px; line-height: 40px; text-align: center; color: #fff;letter-spacing: 2px;width: 100%;top: 0;left: 0; z-index: 99; position: fixed;}
+		img{vertical-align: top;-webkit-box-reflect:left 10px;float: right;width: 50%; height: 100%;}
+		ul{width: 100%; height:100%;/*height: 432px;*/padding:30px;box-sizing: border-box;}
+		.box{width: 492px; height: 492px;position:absolute; /*top:50%;left: 50%;margin-top: -216px; margin-left: -216px;*/}
+		li{float: left; width: 130px;height: 130px;background: #fff;margin: 5px;border: 2px solid #6ca309;}
+		li span{display: block;text-align: center;line-height: 40px; font-size: 14px;}
+		li strong{display: block;text-align: center;line-height: 40px; letter-spacing:2px; font-size: 18px;color:#367b38;}
+		#box .r{ width:30px; height:100%; position:absolute; right:0; top:0; background:#d2e19c;}
+		#box .l{ width:30px; height:100%; position:absolute; left:0; top:0; background:#d2e19c;}
+		#box .b{ width:100%; height:30px; position:absolute; right:0; bottom:0; background:#95ba1d;}
+		#box .t{ width:100%; height:30px; position:absolute; right:0; top:0; background:#95ba1d;}
+		#box .tr,#box .tl,#box .bl,#box .br{ position:absolute; width:30px; height:30px; background:#feff77;}
+		#box .tr{ right:0; top:0;}
+		#box .tl{ left:0; top:0;}
+		#box .bl{ left:0; bottom:0;}
+		#box .br{ right:0; bottom:0;}
+	</style> 
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById('box');
+            var aDiv=oDiv.getElementsByTagName('div');
+            var clientW=document.documentElement.clientWidth;
+            var clientH=document.documentElement.clientHeight;
+
+            oDiv.style.left=(clientW-oDiv.offsetWidth)/2+'px';
+            oDiv.style.top=(clientH-oDiv.offsetHeight)/2+'px';
+            oDiv.style.margin=0;
+            function drag(obj){
+                obj.onmousedown=function(ev){
+                    var oEvent=ev||event;
+                    oEvent.cancelBubble=true;
+                    var oldX=oEvent.clientX;
+                    var oldY=oEvent.clientY;
+                    var oldW=oDiv.offsetWidth;
+                    var oldH=oDiv.offsetHeight;
+                    var oldL=oDiv.offsetLeft;
+                    var oldT=oDiv.offsetTop;
+                    document.onmousemove=function(ev){
+                        var oEvent=ev||event;
+                        var targetX=oEvent.clientX-oldX;
+                        var targetY=oEvent.clientY-oldY;
+                        if(obj.className.indexOf('r')!=-1){
+                            oDiv.style.width=oldW+targetX+'px';
+                        }
+                        if(obj.className.indexOf('t')!=-1){
+                            oDiv.style.height=-targetY+oldH+'px';
+                            oDiv.style.top=targetY+oldT+'px';
+                        }
+                        if(obj.className.indexOf('l')!=-1){
+                            oDiv.style.width=-targetX+oldW+'px';
+                            oDiv.style.left=targetX+oldL+'px';
+                        }
+                        if(obj.className.indexOf('b')!=-1){
+                            oDiv.style.height=targetY+oldH+'px';
+                        }
+                        console.log(oDiv.style.width)
+                        // console.log(oDiv.style.height)
+                        if(parseInt(oDiv.style.height)<492){
+                            oDiv.style.height=492+'px';
+                        }
+                        if(parseInt(oDiv.style.width)<=492){
+                        	oDiv.style.width=492+'px';
+                         	oDiv.style.height=492+'px';
+                        }
+                        if(parseInt(oDiv.style.width)<=780){
+                         	oDiv.style.height=492+'px';
+                        }
+	                    if(parseInt(oDiv.style.width)>=780){
+	                     	oDiv.style.height=348+'px';
+	                    }
+                        if(parseInt(oDiv.style.width)>=1356){
+                        	oDiv.style.height=205+'px';
+                        }
+
+                    };
+                    document.onmouseup=function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                    };
+                    return false;
+
+                }
+            }
+            function dragMove(){
+                oDiv.onmousedown=function(ev){
+                    var oEvent=ev||event;
+                    var disX=oEvent.clientX-oDiv.offsetLeft;
+                    var disY=oEvent.clientY-oDiv.offsetTop;
+//                    console.log(arr.push({left:oDiv.offsetLeft,top:oDiv.offsetTop}));
+                    document.onmousemove=function(ev){
+                        var oEvent=ev||event;
+                        var clientW=document.documentElement.clientWidth-oDiv.offsetWidth;
+                        var clientH=document.documentElement.clientHeight-oDiv.offsetHeight;
+                        var l=oEvent.clientX-disX;
+                        var t=oEvent.clientY-disY;
+
+                        if(l<=0) l=0;
+                        if(t<=40) t=40;
+                        if(l>=clientW) l=clientW;
+                        if(t>=clientH) t=clientH;
+                        oDiv.style.left=l+'px';
+                        oDiv.style.top=t+'px';
+
+//                        console.log(arr.push({left:l,top:t}));
+
+                    };
+                    document.onmouseup=function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                    };
+                    return false;
+                };
+            }
+            dragMove();
+            for(var i=0;i<aDiv.length;i++){
+                    drag(aDiv[i]);
+            }
+        }
+    </script>
+</head>
+<body>
+	<h1>九宫格拖拽</h1>
+	<img src="img/11.jpg" alt="">
+	<div class="box" id="box">
+		<ul>
+			<li>
+				<span>【起床时间】</span>
+				<strong>7点半~8点之间</strong>
+			</li>
+			<li>
+				<span>【早晨心情】</span>
+				<strong>听歌身心很舒畅</strong>
+			</li>
+			<li>
+				<span>【营养早餐】</span>
+				<strong>鸡蛋、牛奶、水果、面包</strong>
+			</li>
+			<li>
+				<span>【上班方式】</span>
+				<strong>地铁很挤</strong>
+			</li>
+			<li>
+				<span>【学习/工作状况】</span>
+				<strong>不断进步中</strong>
+			</li>
+			<li>
+				<span>【个性签名】</span>
+				<strong>内心要强大</strong>
+			</li>
+			<li>
+				<span>【博客/八卦】</span>
+				<strong>不太关注</strong>
+			</li>
+			<li>
+				<span>【周末娱乐】</span>
+				<strong>看电影、听音乐</strong>
+			</li>
+			<li>
+				<span>【喜欢的运动】</span>
+				<strong>晚上散步、慢跑、游泳</strong>
+			</li>
+		</ul>
+		<div class="r"></div>
+		<div class="b"></div>
+		<div class="l"></div>
+		<div class="t"></div>
+
+		<div class="tr"></div>
+		<div class="tl"></div>
+		<div class="bl"></div>
+		<div class="br"></div>
+	</div>
+</body>
+</html>
