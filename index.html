@@ -22,7 +22,7 @@
 					<li class="addressItem addressItem-tel">Tel:15901110898</li>
 					<li class="addressItem addressItem-email">E-mail:619419339@qq.com</li>
 					<li class="addressItem addressItem-blog">
-					<a class="button" href="jhs/juhuasuan.html" target="_blank">个人作品</a></li>
+					<a class="button" href="resume/index.html" target="_blank">个人作品</a></li>
 				</ul>				
 			</address>
 		</div>
@@ -73,12 +73,12 @@
 							</div>
 						</li>
 						<li class="sectionBodyList-item sectionBodyList-item-sql sectionBodyList-item--practised">
-							<h4 class="sectionBodyList-item__name">Juery &amp; Ajax &amp; Jsonp &amp; Dom</h4>
+							<h4 class="sectionBodyList-item__name">jQuery &amp; Ajax &amp; Jsonp &amp; Dom</h4>
 							<div class="sectionBodyList-item__detail fade">
 								<ul class="list">
-									<li>能熟练设计CMS、Blog等常见Web应用的数据库；</li>
-									<li>熟悉SQL Server、MySQL、SQLite的使用；</li>
-									<li>能编写简单的存储过程和触发器。</li>
+									<li>熟悉使用jQuery,bootstrap,swipe,ajax等库和插件;</li>
+									<li>熟悉php,nodejs交互;</li>
+									<li>熟练DOM操作。</li>
 								</ul>
 							</div>
 						</li>
@@ -235,20 +235,20 @@
 					<section class="project clearfix">
 						<div class="project__intro">
 							<header class="project__intro__header clearfix">
-								<h4 class="project__intro__header__title">打字机效果</h4>
+								<h4 class="project__intro__header__title">拉斐尔(Raphael)画图</h4>
 								<ul class="tech-tag-list">
-									<li class="tech-tag-list__item tech-tag-list__item-javascript">css</li>
-									<li class="tech-tag-list__item tech-tag-list__item-nodejs">Javascript</li>
+									<li class="tech-tag-list__item tech-tag-list__item-javascript">h5+css3</li>
+									<li class="tech-tag-list__item tech-tag-list__item-nodejs">矢量图形的js库</li>
 								</ul>
 							</header>
-							<p>1.整个效果运用了Div+css布局，js原生代码中Dom操作，运动，字符串方法和计时器。</p>
-							<p>2.实现原理：首先分3段文字，把3段文字以传参的方式传进函数中，动态创建oSpan标签，需要注意的是循环完1段文字要把3段文字都放在一个数组中。然后启动计时器加运动效果。</p>
+							<p>1.Raphael.js是一个很小的JavaScript库，它可以在网页中实现绘制各种矢量图、各类图表、以及图像裁剪、旋转、运动动画等等功能。</p>
+							<p>2.网络下载源代码坐标点位置</p>
 							<p class="project__intro__links">
-								<a href="resume/demo/Distribution/Distribution.html" target="_blank">项目地址</a>
+								<a href="resume/demo/raphael/tiger.html" target="_blank">项目地址</a>
 							</p>
 						</div>
 						<div class="project__thumb">
-							<img src="images/typewriter.jpg" alt="">
+							<img src="images/raphael.png" alt="">
 						</div>
 					</section>
 					<section class="project clearfix">
@@ -270,11 +270,87 @@
 							<img src="images/magnifier.jpg" alt="">
 						</div>
 					</section>
+					<section class="project clearfix">
+						<div class="project__intro">
+							<header class="project__intro__header clearfix">
+								<h4 class="project__intro__header__title">时钟效果</h4>
+								<ul class="tech-tag-list">
+									<li class="tech-tag-list__item tech-tag-list__item-javascript">css3</li>
+									<li class="tech-tag-list__item tech-tag-list__item-nodejs">Javascript</li>
+								</ul>
+							</header>
+							<p>1.Date方法,时分秒针的位置。</p>
+							<p>2.一圈60格%5=0时,画时的粗线。</p>
+							<p>3.之后再判断，在i=0时正好12点，依次去/5得到位置旋转6度。</p>
+							<p>4.把动态创建的线添加到父级。</p>
+							<p class="project__intro__links">
+								<a href="resume/demo/clock/clock.html" target="_blank">项目地址</a>
+							</p>
+						</div>
+						<div class="project__thumb">
+							<img src="images/timer.jpg" alt="">
+						</div>
+					</section>
+					<section class="project clearfix">
+						<div class="project__intro">
+							<header class="project__intro__header clearfix">
+								<h4 class="project__intro__header__title">windows效果</h4>
+								<ul class="tech-tag-list">
+									<li class="tech-tag-list__item tech-tag-list__item-javascript">canvas</li>
+									<li class="tech-tag-list__item tech-tag-list__item-nodejs">Javascript</li>
+								</ul>
+							</header>
+							<p>1.调整画布大小</p>
+							<p>2.创建几个点，点的位置随机。</p>
+							<p>3.启动计时器，判断边界。</p>
+							<p>4.点连成线。</p>
+							<p>5.存之前的线。</p>
+							<p>6.画旧线。</p>
+							<p class="project__intro__links">
+								<a href="resume/demo/windows/windows.html" target="_blank">项目地址</a>
+							</p>
+						</div>
+						<div class="project__thumb">
+							<img src="images/windows.png" alt="">
+						</div>
+					</section>
+					<section class="project clearfix">
+						<div class="project__intro">
+							<header class="project__intro__header clearfix">
+								<h4 class="project__intro__header__title">轮播图-无缝滚动</h4>
+								<ul class="tech-tag-list">
+									<li class="tech-tag-list__item tech-tag-list__item-javascript">css</li>
+									<li class="tech-tag-list__item tech-tag-list__item-nodejs">Javascript</li>
+								</ul>
+							</header>
+							<p>1.整个效果运用了Div+css布局，js原生代码。</p>
+							<p>2.实现原理：存个变量计数。点击左右箭头的时候，到最后了就瞬间把第一个拽回来。</p>
+							<p class="project__intro__links">
+								<a href="resume/demo/tab/tab.html" target="_blank">项目地址</a>
+							</p>
+						</div>
+						<div class="project__thumb">
+							<img src="images/tab.png" alt="">
+						</div>
+					</section>
 				</div>
 
 			</div>
 		</section>
 
 	</div> 
+	<footer class="footer">
+		<div class="w clearfix">
+			<div class="footer__qrcode clearfix">
+				<img src="images/ma.png" alt="二维码" class="footer__qrcode__img">
+				<p class="footer__qrcode__text">您还可以使用手机或iPad<br>扫描左侧二维码打开本页</p>
+			</div>
+			<div class="footer__copyright">
+				<p>最后更新于2015年7月25日<span class="footer__copyright__comment"></span></p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- <div style="display: none;"><script src="javascript:;"></script><script src="javascript:;" charset="utf-8" type="text/javascript"></script><a href="#" target="_blank" title="站长统计">站长统计</a></div> -->
 </body>
 </html>

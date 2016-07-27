@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background: #fff;
+            overflow: hidden;
+        }
+        canvas{
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="c1" width="800" height="600"></canvas>
+
+    <script>
+        function rnd(n,m){
+            return parseInt(Math.random()*(m-n))+n;
+        }
+        window.onload = function () {
+            console.log(111);
+            var oC=document.querySelector('#c1');
+
+            // 调整画布大小
+            var winW=document.documentElement.clientWidth;
+            var winH=document.documentElement.clientHeight;
+            oC.width=winW;
+            oC.height=winH;
+
+            var gd=oC.getContext('2d');
+
+            var N=5;    // 几个点
+            var aPoint=[]; // {x: , y: ,iSpeedX: , iSpeedY: }
+            var oldArr=[]; // [[{},{},{},{},{}],[],[],[],[],[],[]]
+            var LEN=50;
+
+            for(var i=0; i<N; i++){
+                aPoint[i]={
+                    x: rnd(0, winW),
+                    y: rnd(0, winH),
+                    iSpeedX: rnd(-10,10),
+                    iSpeedY: rnd(-10, 10)
+                }
+            }
+
+            setInterval(function(){
+                gd.clearRect(0,0,oC.width,oC.height);
+                for(var i=0; i<aPoint.length; i++){
+                    aPoint[i].x+=aPoint[i].iSpeedX;
+                    aPoint[i].y+=aPoint[i].iSpeedY;
+
+                    if(aPoint[i].x<0){
+                        aPoint[i].x=0;
+                        aPoint[i].iSpeedX*=-1;
+                    }
+                    if(aPoint[i].y<0){
+                        aPoint[i].y=0;
+                        aPoint[i].iSpeedY*=-1;
+                    }
+                    if(aPoint[i].x>winW){
+                        aPoint[i].x=winW;
+                        aPoint[i].iSpeedX*=-1;
+                    }
+                    if(aPoint[i].y>winH){
+                        aPoint[i].y=winH;
+                        aPoint[i].iSpeedY*=-1;
+                    }
+                    createPoint(aPoint[i]);
+                }
+                // 点连成线
+                gd.beginPath();
+                gd.strokeStyle='#fff';
+                gd.moveTo(aPoint[0].x, aPoint[0].y);
+                for(var i=1; i<aPoint.length; i++){
+                    gd.lineTo(aPoint[i].x, aPoint[i].y);
+                }
+                gd.closePath();
+                gd.stroke();
+
+                // 存之前的线
+                var arr=[];
+                for(var i=0; i<aPoint.length; i++){
+                    arr[i]={
+                        x: aPoint[i].x,
+                        y: aPoint[i].y
+                    }
+                }
+                oldArr.push(arr);
+                if(oldArr.length>LEN){
+                    oldArr.shift();
+                }
+                // 画旧线
+                // [[{},{},{},{},{}],[],[],[],[],[],[]]
+                for(var i=0; i<oldArr.length; i++){
+                    gd.beginPath();
+                    gd.strokeStyle='rgba(255,255,255,'+(i/LEN)+')';
+                    gd.moveTo(oldArr[i][0].x, oldArr[i][0].y);
+                    for(var j=1; j<oldArr[i].length; j++){
+                        gd.lineTo(oldArr[i][j].x, oldArr[i][j].y);
+                    }
+                    gd.closePath();
+                    gd.stroke();
+                }
+            }, 16);
+
+            function createPoint(p){
+                var pW=1;
+                var pH=1;
+                gd.fillStyle='#fff';
+                gd.fillRect(p.x-pW/2, p.y-pH/2, pW, pH);
+            }
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
